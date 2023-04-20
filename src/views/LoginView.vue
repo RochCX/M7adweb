@@ -24,7 +24,7 @@
 </template>
 <script>
 // import { mapState, mapMutations } from "vuex";
-import {auth} from "../auth/auth.service.js"
+import {auth} from "@/firebase/index.js"
 import store from "@/store";
 // import Swal from 'sweetalert2'
 // import router from "@/router";

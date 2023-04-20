@@ -1,9 +1,7 @@
 import { createStore } from 'vuex'
-import { Cursos } from '@/services/CursosDisponibles.js'
 
 export default createStore({
   state: {
-    cursos: Cursos.getCursos(),
     conectado: false,
   },
   getters: {

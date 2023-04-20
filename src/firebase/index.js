@@ -6,6 +6,10 @@
 // Your web app's Firebase configuration
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
+
+
 const firebaseConfig = {
   apiKey: "AIzaSyCb_JDmxcyHkEzv60Bi0qRr-di-8hnITCY",
   authDomain: "adweb-1cfdf.firebaseapp.com",
@@ -18,7 +22,10 @@ const firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
 export {
-    auth
+    auth,
+    db
 };
