@@ -1,7 +1,7 @@
 <template>
   <nav>
-    <router-link to="/">Inicio</router-link> |
-    <router-link to="/login">Login</router-link> |
+    <router-link to="/">Login</router-link> |
+    <router-link to="/home">Home</router-link> |
     <router-link to="/register">Registro</router-link>
   </nav>
   <router-view/>
