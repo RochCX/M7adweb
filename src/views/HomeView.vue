@@ -1,3 +1,12 @@
 <template>
-    <h1>Pantalla Principal</h1>
+    <CursosCards/>
 </template>
+
+<script>
+    import CursosCards from '@/components/CursosCards.vue'
+    export default {
+        components: {
+            CursosCards
+        }
+    }
+</script>
