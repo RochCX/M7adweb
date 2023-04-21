@@ -10,8 +10,8 @@
           <div class="card-body bg-light">
             <font-awesome-icon :icon="['fas', 'cat']" />
             <form >
-                <input v-model.trim="loginForm.email"  class="form-control mt-3" placeholder="Email" type="email">
-                <input v-model.trim="loginForm.password"  class="form-control mt-3" placeholder="Password" type="password">
+                <input v-model.trim="loginForm.email"  class="form-control mt-3" placeholder="Email" type="email" autocomplete="email">
+                <input v-model.trim="loginForm.password"  class="form-control mt-3" placeholder="Password" type="password" autocomplete="password">
                 <button class="btn btn-success mt-3" value="Ingresar" @click.prevent="login()">Ingresar</button>
                 <button class="btn btn-success mt-3" value="Token" @click.prevent="accessToken()">Access Token</button>
                 <button class="btn btn-success mt-3" value="chao" @click.prevent="loggout()">Chao</button>
@@ -24,7 +24,7 @@
 </template>
 <script>
 // import { mapState, mapMutations } from "vuex";
-import {auth} from "../auth/auth.service.js"
+import {auth} from "@/firebase/index.js"
 import store from "@/store";
 // import Swal from 'sweetalert2'
 // import router from "@/router";
