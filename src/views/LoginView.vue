@@ -12,9 +12,10 @@
             <form >
                 <input v-model.trim="loginForm.email"  class="form-control mt-3" placeholder="Email" type="email" autocomplete="email">
                 <input v-model.trim="loginForm.password"  class="form-control mt-3" placeholder="Password" type="password" autocomplete="password">
-                <button class="btn btn-success mt-3" value="Ingresar" @click.prevent="login()">Ingresar</button>
-                <button class="btn btn-success mt-3" value="Token" @click.prevent="accessToken()">Access Token</button>
-                <button class="btn btn-success mt-3" value="chao" @click.prevent="loggout()">Chao</button>
+                <button class="btn btn-success mt-3 me-3" value="Ingresar" @click.prevent="login()">Ingresar</button>
+                <button class="btn btn-success mt-3 ms-3" value="chao" @click.prevent="loggout()">Chao</button>
+                <br><br>
+                <a href=""><router-link to="/register">No tienes cuenta? Has click</router-link></a>
             </form>
           </div>
         </div>
@@ -26,8 +27,8 @@
 // import { mapState, mapMutations } from "vuex";
 import {auth} from "@/firebase/index.js"
 import store from "@/store";
-// import Swal from 'sweetalert2'
-// import router from "@/router";
+import Swal from 'sweetalert2'
+import router from "@/router";
 const state = store.state;
 
 
@@ -53,22 +54,24 @@ export default {
       auth
         .signInWithEmailAndPassword(
           this.loginForm.email,
-          this.loginForm.password
+          this.loginForm.password,
+          state.nameMail = this.loginForm.email
         )
         .then(function (fbUser) {
           console.log('Respuesta ',fbUser);
           state.conectado = true;
           console.log(state.conectado);
-          // router.push('/home')
+          router.push('/home')
         })
         .catch((err) => {
           console.log(err);
-          // Swal.fire({
-          //   icon: 'error',
-          //   title: 'Como tan weon',
-          //   text: "Usuario o contraseña incorrectos",
-          //   footer: '<a href="/register">No tienes cuenta? has click aqui</a>'
-          // })
+          if (!state.conectado) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Como tan weon',
+            text: "Usuario o contraseña incorrectos",
+            footer: '<a href="/register">No tienes cuenta? has click aqui</a>'
+          })}
         });
     },
     async accessToken() {

@@ -1,11 +1,21 @@
 <template>
-  <nav>
-    <router-link to="/">Login</router-link> |
-    <router-link to="/home">Home</router-link> |
-    <router-link to="/register">Registro</router-link>
-  </nav>
+  <NavBar/>
   <router-view/>
 </template>
+
+<script>
+import {mapState} from "vuex";
+import NavBar from "./components/NavBar.vue"
+
+export default{
+  components:{
+    NavBar
+  },
+  computed: {
+    ...mapState(["conectado"])
+  }
+}
+</script>
 
 <style>
 #app {

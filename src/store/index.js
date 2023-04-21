@@ -3,6 +3,7 @@ import { createStore } from 'vuex'
 export default createStore({
   state: {
     conectado: false,
+    nameMail: "",
   },
   getters: {
   },
@@ -12,6 +13,9 @@ export default createStore({
     },
     loggear(state){
       state.conectado = true;
+    },
+    desloggear(state){
+      state.conectado = false;
     }
   },
   actions: {
