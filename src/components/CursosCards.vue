@@ -1,7 +1,7 @@
 <template>
     <!-- <AgregarModal></AgregarModal> -->
     <div v-if="cargando" id="carga">
-		<PulseLoader :loading="loading" :color="color" :size="size"></PulseLoader>
+		<PulseLoader></PulseLoader>
 	</div>
     <div class="container" v-else>
         <div class="row g-3">
