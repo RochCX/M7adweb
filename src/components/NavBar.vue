@@ -2,7 +2,7 @@
     <nav class="navbar navbar-expand-lg bg-body-tertiary success" data-bs-theme="dark" v-if="conectado">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">
-        <img src="../assets/logo.png" alt="" class="logo" style="height: 100px;">
+        <img src="../assets/Flop.png" alt="" class="logo" style="height: 100px;">
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>

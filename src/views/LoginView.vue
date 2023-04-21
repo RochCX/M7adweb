@@ -1,5 +1,4 @@
 <template>
-  <h1>Inicio de Sesión</h1>
   <div class="container app">
     <div class="row my-5 justify-content-center">
       <div class="col-md-6 my-5 ">
@@ -34,17 +33,13 @@ const state = store.state;
 
 export default {
   name: 'LoginVue',
-  components: {
-    // FooterPage,
-    // CarritoCompras
-  },
   data: function() {
       return {
         loginForm: {
             email: '',
             password: ''
         },
-        // estado: false,
+        
     };
   },
   computed:{
@@ -57,10 +52,8 @@ export default {
           this.loginForm.password,
           state.nameMail = this.loginForm.email
         )
-        .then(function (fbUser) {
-          console.log('Respuesta ',fbUser);
+        .then(function () {
           state.conectado = true;
-          console.log(state.conectado);
           router.push('/home')
         })
         .catch((err) => {
@@ -81,10 +74,10 @@ export default {
   loggout(){
     if (state.conectado == true){
       state.conectado = false;
-      console.log(state.conectado);
+
     }
     else{
-      alert("no te has conectado")
+      Swal.fire('Estas desconectado!')
     }
   }
   },
