@@ -36,6 +36,7 @@
 <script>
 // import {getAuth} from 'firebase/auth'
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import Swal from "sweetalert2";
 
 export default {
   data() {
@@ -54,7 +55,12 @@ export default {
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
-          console.log("Error al inscribir nuevo usuario: " + errorMessage + errorCode);
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: errorMessage,
+            footer: errorCode
+            })
         });
       console.log(this.correoIngresado, this.passIngresado)
     }
