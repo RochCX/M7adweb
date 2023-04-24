@@ -1,5 +1,6 @@
 import { createStore } from 'vuex'
-let logCheck = JSON.parse(localStorage.getItem('connect'))
+let estado = localStorage.getItem('connect')
+let logCheck = JSON.parse(estado)
 
 export default createStore({
   state: {
@@ -16,7 +17,8 @@ export default createStore({
       state.conectado = true;
     },
     desloggear(state){
-      logCheck = JSON.parse(localStorage.setItem('connect',false));
+      let desconecta = localStorage.setItem('connect',false)
+      logCheck = JSON.parse(desconecta);
       state.conectado = false;
     }
   },

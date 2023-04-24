@@ -35,35 +35,31 @@
 
 <script>
 // import {getAuth} from 'firebase/auth'
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
-// export default {
-//   data() {
-//     return {
-//       correoIngresado: "",
-//       passIngresado: "",
-//     }
-//   },
-//   methods:{
-//     dameDatos(){
-//       getAuth()
-//       .createUser({
-//         email: correoIngresado,
-//         emailVerified: true,
-//         password: passIngresado,
-//         photoURL: 'http://www.example.com/12345678/photo.png',
-//         disabled: false,
-//       })
-//       .then((userRecord) => {
-//         // See the UserRecord reference doc for the contents of userRecord.
-//         console.log('Successfully created new user:', userRecord.uid);
-//       })
-//       .catch((error) => {
-//         console.log('Error creating new user:', error);
-//       })
-//       console.log(this.correoIngresado, this.passIngresado)
-//     }
-//   }
-// }
+export default {
+  data() {
+    return {
+      correoIngresado: '',
+      passIngresado: '',
+    }
+  },
+  methods:{
+    dameDatos(){
+      const auth = getAuth();
+      createUserWithEmailAndPassword(auth, this.correoIngresado, this.passIngresado)
+        .then((userCredential) => {
+          console.log("Nuevo usuario registrado: " + userCredential.user.uid);
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.log("Error al inscribir nuevo usuario: " + errorMessage + errorCode);
+        });
+      console.log(this.correoIngresado, this.passIngresado)
+    }
+  }
+}
 </script>
 
 <style>
