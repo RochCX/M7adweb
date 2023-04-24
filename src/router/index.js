@@ -43,14 +43,14 @@ router.beforeEach((to,from,next) => {
       let timerInterval
                         Swal.fire({
                         title: 'Debes conectarte primero!',
-                        html: 'Seras redireccionado en <b></b> milisegundos.',
+                        html: 'Seras redireccionado en <b></b> segundos.',
                         timer: 3500,
                         timerProgressBar: true,
                         didOpen: () => {
                             Swal.showLoading()
                             const b = Swal.getHtmlContainer().querySelector('b')
                             timerInterval = setInterval(() => {
-                            b.textContent = Swal.getTimerLeft()
+                            b.textContent = (Swal.getTimerLeft()/1000).toFixed(0)
                             }, 100)
                         },
                         willClose: () => {
