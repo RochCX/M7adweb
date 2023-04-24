@@ -53,6 +53,8 @@ export default {
           state.nameMail = this.loginForm.email
         )
         .then(function () {
+          localStorage.getItem('connect')
+          localStorage.setItem('connect',true)
           state.conectado = true;
           router.push('/home')
         })

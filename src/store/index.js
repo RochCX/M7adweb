@@ -1,8 +1,9 @@
 import { createStore } from 'vuex'
+let logCheck = localStorage.getItem('connect')
 
 export default createStore({
   state: {
-    conectado: false,
+    conectado: logCheck,
     nameMail: "",
   },
   getters: {
@@ -15,6 +16,7 @@ export default createStore({
       state.conectado = true;
     },
     desloggear(state){
+      logCheck = localStorage.setItem('connect',false);
       state.conectado = false;
     }
   },
