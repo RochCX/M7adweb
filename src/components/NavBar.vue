@@ -9,13 +9,22 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-link active" aria-current="page" href="#"><router-link to="/home">Home</router-link></a>
-        <a class="nav-link active" aria-current="page" href="#"><router-link to="/register">Registro</router-link></a>
-        <a class="nav-link active" href="#"  data-bs-toggle="modal" data-bs-target="#loggoutModal">Cerrar sesión</a>
+        
+          <router-link to="/home" class="nav-link">Home</router-link>
+
+          <router-link to="/crud" class="nav-link">Crud</router-link>
+
+          <router-link to="/register" class="nav-link">Registro</router-link>
+        
+        <a class="nav-link" href="#"  data-bs-toggle="modal" data-bs-target="#loggoutModal">Cerrar sesión</a>
         <!-- <a class="nav-link active" aria-current="page" href="#"><router-link to="/">Home</router-link></a> -->
+        <a href="#" class="nav-link ms-lg-auto" data-bs-toggle="modal" data-bs-target="#loggoutModal">{{ nameMail }} </a>
+        
       </div>
     </div>
-    <div class="d-flex justify-content-end align-items-end" aria-current="page" style="color: white;" data-bs-toggle="modal" data-bs-target="#loggoutModal"><div class="p-2 justify-content-end align-items-end">{{ nameMail }}</div></div>
+    <!-- <div class="d-flex justify-content-end align-items-end" aria-current="page" style="color: white;" data-bs-toggle="modal" data-bs-target="#loggoutModal"><div class="p-2 justify-content-end align-items-end">{{ nameMail }}</div></div> -->
+
+    
   </div>
   <br>
   <div class="modal fade" id="loggoutModal" data-bs-theme="light" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -57,4 +66,20 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+nav {
+  margin-bottom: 1em;
+}
+
+
+.nav-link:focus, .nav-link:hover {
+  color: #42b983;
+}
+
+
+.navbar-nav {
+ width: 100%;
+ margin: 1em;
+}
+
+
 </style>
