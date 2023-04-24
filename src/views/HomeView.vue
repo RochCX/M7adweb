@@ -14,8 +14,8 @@ const state = store.state;
         components: {
             CursosCards
         },
-        created() {
-            this.arranca() ? this.countdown() : null
+        computed: {
+            
         },
         methods:{
             arranca(){
