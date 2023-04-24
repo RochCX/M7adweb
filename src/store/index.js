@@ -1,6 +1,7 @@
 import { createStore } from 'vuex'
-let estado = localStorage.getItem('connect')
+let estado = localStorage.getItem('connect',false)
 let logCheck = JSON.parse(estado)
+console.log(logCheck)
 
 export default createStore({
   state: {

@@ -39,7 +39,7 @@ router.beforeEach((to,from,next) => {
   if (to.path === '/' || to.path === '/register') {
     next();
   }
-    else if(state.conectado == false){
+    else if(state.conectado == false || state.conectado == null) {
       let timerInterval
                         Swal.fire({
                         title: 'Debes conectarte primero!',
