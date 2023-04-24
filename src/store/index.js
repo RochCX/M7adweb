@@ -17,8 +17,9 @@ export default createStore({
       state.conectado = true;
     },
     desloggear(state){
-      let desconecta = localStorage.setItem('connect',false)
-      logCheck = JSON.parse(desconecta);
+      localStorage.getItem('connect')
+      localStorage.setItem('connect',false)
+      logCheck = JSON.parse(localStorage.getItem('connect'));
       state.conectado = false;
     }
   },
