@@ -1,5 +1,5 @@
 <template>
-    <button class="btn btn-primary mb-3">
+    <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#curso-nuevo">
         Agregar Curso
     </button>
     <table class="table">
@@ -35,11 +35,34 @@
     </table>
 
     <!-- Modal -->
+    <div class="modal fade" id="curso-nuevo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <input type="text" class="form-control" placeholder="Nombre del Curso" v-model="inputNombre">
+        <input type="text" class="form-control" placeholder="Descripción del Curso" v-model="inputDescripcion">
+        <input type="text" class="form-control" placeholder="Precio del Curso" v-model="inputPrecio">
+        <input type="text" class="form-control" placeholder="Duracion del Curso" v-model="inputDuracion">
+        <input type="text" class="form-control" placeholder="Cupos del Curso" v-model="inputCupos">
+        <input type="text" class="form-control" placeholder="Inscritos del Curso" v-model="inputIncritos">
+        <input type="text" class="form-control" placeholder="Estado del Curso" v-model="inputNombre">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary">Agregar Curso</button>
+      </div>
+    </div>
+  </div>
+</div>
 </template>
 
 <script>
 import { db } from '@/firebase/index.js'
-import { collection, getDocs, doc, deleteDoc } from "firebase/firestore";
+import { collection, getDocs, doc, deleteDoc, addDoc, setDoc } from "firebase/firestore";
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
 import Swal from 'sweetalert2'
 
@@ -79,7 +102,6 @@ export default {
         },
 
         modalBorrar(laID) {
-            console.log(laID)
             Swal.fire({
                 title: '¿Deseas eliminar este curso?',
                 showCancelButton: true,
@@ -92,6 +114,17 @@ export default {
                     Swal.fire('Acción cancelada', '', 'info')
                 }
             })
+        },
+
+        async agregarCurso() {
+            const docRef = await addDoc(collection(db, "cursos"), {});
+            docRef;
+            await setDoc(doc(db, "cursos", docRef.id), {
+                id: docRef.id,
+                nombre: "Curso de Prueba",
+                descripcion: "Testing "
+            });
+            this.actualizarCursos();
         }
     },
     created: async function () {
