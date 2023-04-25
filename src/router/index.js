@@ -37,6 +37,11 @@ const router = createRouter({
 
 router.beforeEach((to,from,next) => {
   if (to.path === '/' || to.path === '/register') {
+    if (to.path === '/') {
+      localStorage.getItem('connect');
+      localStorage.setItem('connect',false);
+      state.conectado = false;
+    }
     next();
   }
     else if(state.conectado == false || state.conectado == null) {
