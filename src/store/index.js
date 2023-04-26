@@ -45,8 +45,9 @@ export default createStore({
       const querySnapshot = await getDocs(collection(db, "cursos"));  
       commit('cargarCursos', querySnapshot)
     },
-    async eliminarCurso(state, elemento) {
+    async eliminarCurso({dispatch}, elemento) {
       await deleteDoc(doc(db, "cursos", elemento));
+      dispatch('cargarCursos')
     },
     async agregarCurso({dispatch}, payload) {
       const objeto = {...payload};
@@ -64,16 +65,16 @@ export default createStore({
           estado: objeto.inputEstado,
           img: objeto.inputImg
       });
+      dispatch('cargarCursos')
       Swal.fire({
           title: '¡Creado!',
           text: 'El curso se ha creado correctamente',
           icon: 'success',
       });
-      dispatch('cargarCursos')
+      
     },
     async modificarCurso({dispatch}, payload) {
           const objeto = {...payload};
-          console.log(objeto)
        await setDoc(doc(db, "cursos", objeto.cursoID), {
           id: objeto.cursoID,
           nombre: objeto.inputNombre,
