@@ -87,8 +87,6 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import { db } from '@/firebase/index.js'
-import { getDocs } from "firebase/firestore";
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
 import Swal from 'sweetalert2'
 
@@ -126,11 +124,6 @@ export default {
     methods: {
         ...mapActions(['cargarCursos', 'eliminarCurso', 'agregarCurso', 'modificarCurso']),
 
-        async retornarAlgo(elemento) {
-            await console.log(elemento)
-            console.log(getDocs(db, "cursos").data())
-        },
-
         modalBorrar(laID) {
             Swal.fire({
                 title: '¿Deseas eliminar este curso?',
@@ -155,7 +148,6 @@ export default {
         actualizarCurso() {
             this.cursos = [];
             this.cursos = this.arrayCursos;
-            alert('se actualizo')
         },
 
         vaciarCurso() {
