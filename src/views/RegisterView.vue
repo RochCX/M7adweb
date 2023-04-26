@@ -14,7 +14,10 @@
               <div class="input-group-prepend">
                 <span class="input-group-text"><font-awesome-icon :icon="['fa','fa-envelope']"/></span>
               </div>
-              <input v-model="correoIngresado" type="email" class="form-control" id="email" placeholder="Ingrese su correo electrónico">
+              <input v-model="correoIngresado" type="email" class="form-control" id="email" placeholder="Ingrese su correo electrónico" required>
+              <div class="invalid-feedback">
+                Por favor ingrese un correo electrónico válido.
+              </div>
             </div>
           </div>
           <div class="form-group">
@@ -23,7 +26,10 @@
               <div class="input-group-prepend">
                 <span class="input-group-text"><font-awesome-icon :icon="['fa','fa-lock']"/></span>
               </div>
-              <input v-model="passIngresado" type="password" class="form-control" id="password" placeholder="Ingrese su contraseña">
+              <input v-model="passIngresado" type="password" class="form-control" id="password" placeholder="Ingrese su contraseña" required>
+              <div class="invalid-feedback">
+                La contraseña debe tener al menos 6 caracteres, una mayúscula y 2 números.
+              </div>
             </div>
           </div>
           <button @click.prevent="dameDatos()" class="btn btn-success btn-block mt-4">Registrarse</button>
@@ -34,7 +40,6 @@
 </template>
 
 <script>
-// import {getAuth} from 'firebase/auth'
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import Swal from "sweetalert2";
 
@@ -46,24 +51,60 @@ export default {
     }
   },
   methods:{
-    dameDatos(){
-      const auth = getAuth();
-      createUserWithEmailAndPassword(auth, this.correoIngresado, this.passIngresado)
-        .then((userCredential) => {
-          console.log("Nuevo usuario registrado: " + userCredential.user.uid);
-        })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          Swal.fire({
-            icon: 'error',
-            title: 'Error',
-            text: errorMessage,
-            footer: errorCode
-            })
-        });
-      console.log(this.correoIngresado, this.passIngresado)
-    }
+    dameDatos() {
+  const auth = getAuth();
+
+  // Validación de campo vacío para correo
+  if (!this.correoIngresado) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: 'Debe ingresar un correo.',
+    });
+    return;
+  }
+
+  // Validación de campo vacío para contraseña
+  if (!this.passIngresado) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: 'Debe ingresar una contraseña.',
+    });
+    return;
+  }
+
+  // Validación de la contraseña
+  if (!/[A-Z]/.test(this.passIngresado) || !/\d{2}/.test(this.passIngresado) || this.passIngresado.length < 6) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: 'La contraseña debe tener al menos 6 caracteres, una mayúscula y al menos 2 números.',
+    });
+    return;
+  }
+
+  createUserWithEmailAndPassword(auth, this.correoIngresado, this.passIngresado)
+    .then((userCredential) => {
+      console.log("Nuevo usuario registrado: " + userCredential.user.uid);
+      Swal.fire({
+        icon: 'success',
+        title: 'Registro exitoso',
+        text: 'El usuario ha sido registrado exitosamente.',
+      });
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: errorMessage,
+        footer: errorCode
+      })
+    });
+  console.log(this.correoIngresado, this.passIngresado)
+}
   }
 }
 </script>
