@@ -39,9 +39,7 @@
   </div>
 </template>
 
-
 <script>
-// import {getAuth} from 'firebase/auth'
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import Swal from "sweetalert2";
 
@@ -50,48 +48,63 @@ export default {
     return {
       correoIngresado: '',
       passIngresado: '',
-      correoValido: true,
-      passValida: true
     }
   },
   methods:{
-    validarCorreo() {
-      const regexCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      this.correoValido = regexCorreo.test(this.correoIngresado);
-    },
-    validarPass() {
-      const regexPass = /^(?=.*[A-Z])(?=.*\d{2})[A-Za-z\d@$!%*?&]{6,}$/;
-      this.passValida = regexPass.test(this.passIngresado);
-    },
-    dameDatos(){
-      this.validarCorreo();
-      this.validarPass();
-      if (!this.correoValido || !this.passValida) {
-        Swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text: 'Por favor revise los campos ingresados',
-          footer: ''
-        });
-        return;
-      }
-      const auth = getAuth();
-      createUserWithEmailAndPassword(auth, this.correoIngresado, this.passIngresado)
-        .then((userCredential) => {
-          console.log("Nuevo usuario registrado: " + userCredential.user.uid);
-        })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          Swal.fire({
-            icon: 'error',
-            title: 'Error',
-            text: errorMessage,
-            footer: errorCode
-          });
-        });
-      console.log(this.correoIngresado, this.passIngresado);
-    }
+    dameDatos() {
+  const auth = getAuth();
+
+  // Validación de campo vacío para correo
+  if (!this.correoIngresado) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: 'Debe ingresar un correo.',
+    });
+    return;
+  }
+
+  // Validación de campo vacío para contraseña
+  if (!this.passIngresado) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: 'Debe ingresar una contraseña.',
+    });
+    return;
+  }
+
+  // Validación de la contraseña
+  if (!/[A-Z]/.test(this.passIngresado) || !/\d{2}/.test(this.passIngresado) || this.passIngresado.length < 6) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: 'La contraseña debe tener al menos 6 caracteres, una mayúscula y al menos 2 números.',
+    });
+    return;
+  }
+
+  createUserWithEmailAndPassword(auth, this.correoIngresado, this.passIngresado)
+    .then((userCredential) => {
+      console.log("Nuevo usuario registrado: " + userCredential.user.uid);
+      Swal.fire({
+        icon: 'success',
+        title: 'Registro exitoso',
+        text: 'El usuario ha sido registrado exitosamente.',
+      });
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: errorMessage,
+        footer: errorCode
+      })
+    });
+  console.log(this.correoIngresado, this.passIngresado)
+}
   }
 }
 </script>
