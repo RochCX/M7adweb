@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary success" data-bs-theme="dark" v-if="conectado">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary success" data-bs-theme="dark" v-if="mirame">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">
         <img src="../assets/Flop.png" alt="" class="logo" style="height: 100px;">
@@ -52,14 +52,17 @@
 
 <script>
 import {mapMutations, mapState} from "vuex";
+// import store from "@/store";
+// const state = store.state;
 
 export default {
     computed: {
-    ...mapState(["conectado"]),
+    // ...mapState(["conectado"]),
     ...mapState(["nameMail"]),
   },
   methods:{
     ...mapMutations(["desloggear"]),
+    ...mapMutations(["mirame"]),
   }
 }
 </script>
