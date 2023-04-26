@@ -76,8 +76,9 @@
                     <button v-if="headerModal == 'Crear Curso'" type="button" class="btn btn-primary"
                         data-bs-dismiss="modal" @click="agregarCurso(datosModal)">
                         {{ headerModal }}</button>
-                    <button v-else type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="modificarCurso(datosModal)">{{
-                        headerModal }}</button>
+                    <button v-else type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                        @click="modificarCurso(datosModal)">{{
+                            headerModal }}</button>
                 </div>
             </div>
         </div>
@@ -87,7 +88,7 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import { db } from '@/firebase/index.js'
-import { getDocs} from "firebase/firestore";
+import { getDocs } from "firebase/firestore";
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
 import Swal from 'sweetalert2'
 
@@ -138,7 +139,6 @@ export default {
             }).then(result => {
                 if (result.isConfirmed) {
                     this.eliminarCurso(laID);
-                    this.cargarCursos()
                     Swal.fire('Eliminado!', '', 'success')
                 } else if (result.isDenied) {
                     Swal.fire('Acción cancelada', '', 'info')
@@ -149,18 +149,25 @@ export default {
         crearCurso() {
             this.headerModal = "Crear Curso";
             this.vaciarCurso();
+
+        },
+
+        actualizarCurso() {
+            this.cursos = [];
+            this.cursos = this.arrayCursos;
+            alert('se actualizo')
         },
 
         vaciarCurso() {
             this.datosModal.inputNombre = "",
-            this.datosModal.inputImg = "https://placehold.co/600x400",
-            this.datosModal.inputDescripcion = "",
-            this.datosModal.inputCodigo = "",
-            this.datosModal.inputPrecio = "",
-            this.datosModal.inputDuracion = "",
-            this.datosModal.inputCupos = "",
-            this.datosModal.inputInscritos = "",
-            this.datosModal.inputEstado = ""
+                this.datosModal.inputImg = "https://placehold.co/600x400",
+                this.datosModal.inputDescripcion = "",
+                this.datosModal.inputCodigo = "",
+                this.datosModal.inputPrecio = "",
+                this.datosModal.inputDuracion = "",
+                this.datosModal.inputCupos = "",
+                this.datosModal.inputInscritos = "",
+                this.datosModal.inputEstado = ""
         },
 
         editarCurso(objeto) {
@@ -174,19 +181,19 @@ export default {
                 this.datosModal.inputInscritos = objeto.inscritos,
                 this.datosModal.inputEstado = objeto.estado,
                 this.datosModal.inputImg = objeto.img
-                this.datosModal.cursoID = objeto.id;
+            this.datosModal.cursoID = objeto.id;
         },
 
-        
-    },
 
+    },
     created: async function () {
-        this.cargarCursos()
+        this.cargarCursos();
+        this.actualizarCurso();
     },
 
     watch: {
-        arrayCursos(valor) {
-            this.cursos = valor
+        arrayCursos(value) {
+            this.cursos = value;
         }
     }
 }
