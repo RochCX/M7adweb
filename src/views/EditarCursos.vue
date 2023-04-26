@@ -18,7 +18,7 @@
             </tr>
         </thead>
 
-        <tbody v-for="curso in arrayCursos" :key="curso.codigo">
+        <tbody v-for="curso in cursos" :key="curso.codigo">
             <tr>
                 <td>{{ curso.nombre }}</td>
                 <td>{{ curso.descripcion }}</td>
@@ -182,6 +182,12 @@ export default {
 
     created: async function () {
         this.cargarCursos()
+    },
+
+    watch: {
+        arrayCursos(valor) {
+            this.cursos = valor
+        }
     }
 }
 </script>
