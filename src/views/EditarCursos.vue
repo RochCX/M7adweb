@@ -16,10 +16,10 @@
                 <th scope="col">Eliminar</th>
             </tr>
         </thead>
-        <div v-if="cargando" id="carga">
+        <div v-if="arrayCursos.length == 0" id="carga">
             <PulseLoader></PulseLoader>
         </div>
-        <tbody v-else v-for="curso in cursos" :key="curso.codigo">
+        <tbody v-else v-for="curso in arrayCursos" :key="curso.codigo">
             <tr>
                 <td>{{ curso.nombre }}</td>
                 <td>{{ curso.descripcion }}</td>
@@ -79,6 +79,7 @@
 </template>
 
 <script>
+import {mapGetters, mapActions} from 'vuex'
 import { db } from '@/firebase/index.js'
 import { collection, getDocs, doc, deleteDoc, addDoc, setDoc } from "firebase/firestore";
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
@@ -111,16 +112,11 @@ export default {
         // AgregarModal
         PulseLoader
     },
+    computed: {
+        ...mapGetters(['arrayCursos']),
+    },
     methods: {
-        async actualizarCursos() {
-            this.cursos = [];
-            this.cargando = true;
-            const querySnapshot = await getDocs(collection(db, "cursos"));
-            querySnapshot.forEach((doc) => {
-                this.cursos.push(doc.data())
-            })
-            this.cargando = false;
-        },
+        ...mapActions(['cargarCursos']),
 
         async retornarAlgo(elemento) {
             await console.log(elemento)
@@ -129,7 +125,7 @@ export default {
 
         async eliminarCurso(elemento) {
             await deleteDoc(doc(db, "cursos", elemento))
-            this.actualizarCursos();
+            this.cargarCursos();
         },
 
         modalBorrar(laID) {
@@ -193,7 +189,7 @@ export default {
                 text: 'El curso se ha editado correctamente',
                 icon: 'success',
             });
-            this.actualizarCursos();
+            this.cargarCursos()
         },
 
         async agregarCurso() {
@@ -215,11 +211,11 @@ export default {
                 text: 'El curso se ha creado correctamente',
                 icon: 'success',
             });
-            this.actualizarCursos();
+            this.cargarCursos()
         }
     },
     created: async function () {
-        this.actualizarCursos()
+        this.cargarCursos()
     }
 }
 </script>
