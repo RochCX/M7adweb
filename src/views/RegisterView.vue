@@ -15,9 +15,6 @@
                 <span class="input-group-text"><font-awesome-icon :icon="['fa','fa-envelope']"/></span>
               </div>
               <input v-model="correoIngresado" type="email" class="form-control" id="email" placeholder="Ingrese su correo electrónico" required>
-              <div class="invalid-feedback">
-                Por favor ingrese un correo electrónico válido.
-              </div>
             </div>
           </div>
           <div class="form-group">
@@ -27,9 +24,6 @@
                 <span class="input-group-text"><font-awesome-icon :icon="['fa','fa-lock']"/></span>
               </div>
               <input v-model="passIngresado" type="password" class="form-control" id="password" placeholder="Ingrese su contraseña" required>
-              <div class="invalid-feedback">
-                La contraseña debe tener al menos 6 caracteres, una mayúscula y 2 números.
-              </div>
             </div>
           </div>
           <button @click.prevent="dameDatos()" class="btn btn-success btn-block mt-4">Registrarse</button>
