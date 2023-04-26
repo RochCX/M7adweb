@@ -1,5 +1,4 @@
 <template>
-  <h1>Registro de Usuario</h1>
   <div class="container my-5">
     <div class="card shadow-lg">
       <div class="card-header bg-success text-white">
@@ -68,7 +67,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
     body {
       background-color: #fff;
     }
