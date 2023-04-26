@@ -64,6 +64,16 @@ export default {
     return;
   }
 
+  // Validación del correo electrónico
+  if (!/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(this.correoIngresado)) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: 'Por favor, ingrese un correo electrónico válido.',
+    });
+    return;
+  }
+
   // Validación de campo vacío para contraseña
   if (!this.passIngresado) {
     Swal.fire({
@@ -109,7 +119,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
     body {
       background-color: #fff;
     }
