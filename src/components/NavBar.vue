@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary success" data-bs-theme="dark" v-if="mirame">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary success" data-bs-theme="dark" v-if="conectado">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">
         <img src="../assets/Flop.png" alt="" class="logo" style="height: 100px;">
@@ -18,7 +18,7 @@
         
         <a class="nav-link" href="#"  data-bs-toggle="modal" data-bs-target="#loggoutModal">Cerrar sesión</a>
         <!-- <a class="nav-link active" aria-current="page" href="#"><router-link to="/">Home</router-link></a> -->
-        <a href="#" class="nav-link ms-lg-auto" data-bs-toggle="modal" data-bs-target="#loggoutModal">{{ nameMail }} </a>
+        <a href="#" class="nav-link ms-lg-auto" data-bs-toggle="modal" data-bs-target="#loggoutModal">{{ fireMail }} </a>
         
       </div>
     </div>
@@ -40,7 +40,7 @@
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                   <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
-                    <router-link to="/" class="nav-link active" @click.prevent = "desloggear">Logout</router-link>
+                    <a class="nav-link active" @click.prevent = "desloggear">Logout</a>
                   </button>
                 </div>
               </div>
@@ -59,10 +59,12 @@ export default {
     computed: {
     // ...mapState(["conectado"]),
     ...mapState(["nameMail"]),
+    ...mapState(["fireMail"]),
+    ...mapState(["conectado"]),
   },
   methods:{
     ...mapMutations(["desloggear"]),
-    ...mapMutations(["mirame"]),
+    // ...mapMutations(["mirame"]),
   }
 }
 </script>

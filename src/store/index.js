@@ -2,16 +2,16 @@ import { createStore } from 'vuex'
 import { db } from '@/firebase/index.js'
 import { collection, getDocs } from "firebase/firestore";
 import { getAuth, signOut } from "firebase/auth";
+import router from "@/router";
 const auth = getAuth();
 
-// let estado = localStorage.getItem('connect',false)
-// let logCheck = JSON.parse(estado)
 
 export default createStore({
   state: {
     conectado: false,
     nameMail: "",
     cursos: [],
+    fireMail: "",
   },
   getters: {
     arrayCursos(state) {
@@ -22,25 +22,16 @@ export default createStore({
     loggear(state){
       state.conectado = true;
     },
-    mirame(state){
-      if (this.$route.name === '/'){
-        return false;
-      } else if(state.conectado === true){
-        return true;
-      }
-    },
     desloggear(state){
       signOut(auth).then(() => {
         // Sign-out successful.
         state.conectado = false;
+        router.push('/')
       }).catch((error) => {
         // An error happened.
         alert(error);
       });
-      // localStorage.getItem('connect')
-      // localStorage.setItem('connect',false)
-      // logCheck = JSON.parse(localStorage.getItem('connect'));
-      
+
     },
     cargarCursos(state, snapshot) {
       state.cursos = []

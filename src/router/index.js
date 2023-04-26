@@ -39,7 +39,7 @@ const router = createRouter({
   routes
 })
 
-router.beforeEach((to,next) => {
+router.beforeEach((to,from,next) => {
   onAuthStateChanged(auth, (user) => {
     if (user) {
       // User is signed in, see docs for a list of available properties
@@ -47,18 +47,47 @@ router.beforeEach((to,next) => {
       const uid = user.uid;
       console.log(uid);
       state.conectado = true;
-      Swal.fire('Estado conectado')
       console.log(state.conectado);
+      state.fireMail = user.email
+      console.log(state.fireMail);
       if(to.path === '/' && state.conectado == true){
         Swal.fire("Ya estas conectado!")
-        // next('/home');
+        next('/home')
+        return
       }
-      try{next('/home')}catch(err){console.log(err)}
+      next()
     }
     else {
-      state.conectado = false;
-    }
-  });
+      if((to.path !== '/' && to.path !== '/register') && state.conectado == false){
+        let timerInterval
+          Swal.fire({
+          title: 'Debes conectarte primero!',
+          html: 'Seras redireccionado en <b></b> segundos.',
+          timer: 3500,
+          timerProgressBar: true,
+          didOpen: () => {
+              Swal.showLoading()
+              const b = Swal.getHtmlContainer().querySelector('b')
+              timerInterval = setInterval(() => {
+              b.textContent = (Swal.getTimerLeft()/1000).toFixed(0)
+              }, 100)
+          },
+          willClose: () => {
+              clearInterval(timerInterval)
+          }
+          }).then((result) => {
+              next('/')
+          /* Read more about handling dismissals below */
+          if (result.dismiss === Swal.DismissReason.timer) {
+              console.log('Fui cerrado por el timer')
+          }
+          })
+      }
+      else{
+        next()
+      }
+  }
+});
 
   // if (to.path === '/' || to.path === '/register') {
   //   if (to.path === '/') {
