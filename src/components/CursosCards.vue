@@ -1,11 +1,11 @@
 <template>
     <!-- <AgregarModal></AgregarModal> -->
-    <div v-if="cargando" id="carga">
+    <div v-if="arrayCursos.length==0" id="carga">
 		<PulseLoader></PulseLoader>
 	</div>
     <div class="container" v-else>
         <div class="row g-3">
-            <div class="col-3" v-for="curso in cursos" :key="curso.codigo">
+            <div class="col-3" v-for="curso in arrayCursos" :key="curso.codigo">
                 <div class="card" :class="curso.estado ? '' : 'card--gris'">
                     <div class="card-header">
                         Curso de {{ curso.nombre }}
@@ -34,18 +34,13 @@
 <script>
 
 // import AgregarModal from '@/components/AgregarModal.vue'
-import { db } from '@/firebase/index.js'
-import { collection, getDocs } from "firebase/firestore";
+import {mapActions, mapGetters} from 'vuex';
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
-
-
 
 export default {
     data() {
         return {
-            cardGris: false,
-            cursos: [],
-            cargando: false,
+            cardGris: false,   
         }
     },
     components: {
@@ -54,15 +49,17 @@ export default {
     },
     created: async function () {
         try {
-            this.cargando = true;
-            const querySnapshot = await getDocs(collection(db, "cursos"));      
-            querySnapshot.forEach((doc) => {
-                this.cursos.push(doc.data()) })
-            this.cargando = false;
+            this.cargarCursos();
             } catch (error) {
                 this.errorMessage = error;
             }
         },
+    computed: {
+        ...mapGetters(['arrayCursos']),
+    },
+    methods: {
+        ...mapActions(['cargarCursos'])
+    }
     }
 </script>
 
