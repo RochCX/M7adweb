@@ -18,7 +18,7 @@
         
         <a class="nav-link" href="#"  data-bs-toggle="modal" data-bs-target="#loggoutModal">Cerrar sesión</a>
         <!-- <a class="nav-link active" aria-current="page" href="#"><router-link to="/">Home</router-link></a> -->
-        <a href="#" class="nav-link ms-lg-auto" data-bs-toggle="modal" data-bs-target="#loggoutModal">{{ nameMail }} </a>
+        <a href="#" class="nav-link ms-lg-auto" data-bs-toggle="modal" data-bs-target="#loggoutModal">{{ fireMail }} </a>
         
       </div>
     </div>
@@ -40,7 +40,7 @@
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                   <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
-                    <router-link to="/" class="nav-link active" @click.prevent = "desloggear">Logout</router-link>
+                    <a class="nav-link active" @click.prevent = "desloggear">Logout</a>
                   </button>
                 </div>
               </div>
@@ -52,14 +52,19 @@
 
 <script>
 import {mapMutations, mapState} from "vuex";
+// import store from "@/store";
+// const state = store.state;
 
 export default {
     computed: {
-    ...mapState(["conectado"]),
+    // ...mapState(["conectado"]),
     ...mapState(["nameMail"]),
+    ...mapState(["fireMail"]),
+    ...mapState(["conectado"]),
   },
   methods:{
     ...mapMutations(["desloggear"]),
+    // ...mapMutations(["mirame"]),
   }
 }
 </script>
