@@ -1,68 +1,70 @@
 <template>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary success" data-bs-theme="dark" v-if="conectado">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">
-        <img src="../assets/Flop.png" alt="" class="logo" style="height: 100px;">
-    </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        
+  <nav class="navbar navbar-expand-lg bg-body-tertiary success" data-bs-theme="dark" v-if="conectado">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <img src="../assets/Flop.png" alt="" class="logo vibrate-1" style="height: 100px;">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+
           <router-link to="/home" class="nav-link">Home</router-link>
 
           <router-link to="/crud" class="nav-link">Crud</router-link>
 
           <router-link to="/register" class="nav-link">Registro</router-link>
-        
-        <a class="nav-link" href="#"  data-bs-toggle="modal" data-bs-target="#loggoutModal">Cerrar sesión</a>
-        <!-- <a class="nav-link active" aria-current="page" href="#"><router-link to="/">Home</router-link></a> -->
-        <a href="#" class="nav-link ms-lg-auto" data-bs-toggle="modal" data-bs-target="#loggoutModal">{{ fireMail }} </a>
-        
+
+          <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#loggoutModal">Cerrar sesión</a>
+          <!-- <a class="nav-link active" aria-current="page" href="#"><router-link to="/">Home</router-link></a> -->
+          <a href="#" class="nav-link ms-lg-auto" data-bs-toggle="modal" data-bs-target="#loggoutModal">{{ fireMail }}
+          </a>
+
+        </div>
+      </div>
+      <!-- <div class="d-flex justify-content-end align-items-end" aria-current="page" style="color: white;" data-bs-toggle="modal" data-bs-target="#loggoutModal"><div class="p-2 justify-content-end align-items-end">{{ nameMail }}</div></div> -->
+
+
+    </div>
+    <br>
+    <div class="modal fade" id="loggoutModal" data-bs-theme="light" tabindex="-1" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel"> Ya te vas?</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            Seguro quieres cerrar sesion?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
+              <a class="nav-link active" @click.prevent="desloggear">Logout</a>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
-    <!-- <div class="d-flex justify-content-end align-items-end" aria-current="page" style="color: white;" data-bs-toggle="modal" data-bs-target="#loggoutModal"><div class="p-2 justify-content-end align-items-end">{{ nameMail }}</div></div> -->
-
-    
-  </div>
-  <br>
-  <div class="modal fade" id="loggoutModal" data-bs-theme="light" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel"> Ya te vas?</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  Seguro quieres cerrar sesion?
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                  <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
-                    <a class="nav-link active" @click.prevent = "desloggear">Logout</a>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-</nav>
-
+  </nav>
 </template>
 
 <script>
-import {mapMutations, mapState} from "vuex";
+import { mapMutations, mapState } from "vuex";
 // import store from "@/store";
 // const state = store.state;
 
 export default {
-    computed: {
+  computed: {
     // ...mapState(["conectado"]),
     ...mapState(["nameMail"]),
     ...mapState(["fireMail"]),
     ...mapState(["conectado"]),
   },
-  methods:{
+  methods: {
     ...mapMutations(["desloggear"]),
     // ...mapMutations(["mirame"]),
   }
@@ -76,15 +78,94 @@ nav {
 }
 
 
-.nav-link:focus, .nav-link:hover {
+.nav-link:focus,
+.nav-link:hover {
   color: #42b983;
 }
 
 
 .navbar-nav {
- width: 100%;
- margin: 1em;
+  width: 100%;
+  margin: 1em;
 }
 
+.vibrate-1 {
+  -webkit-animation: vibrate-1 0.3s linear infinite both;
+  animation: vibrate-1 0.3s linear infinite both;
+}
 
-</style>
+/* ----------------------------------------------
+ * Generated by Animista on 2023-4-27 9:45:30
+ * Licensed under FreeBSD License.
+ * See http://animista.net/license for more info. 
+ * w: http://animista.net, t: @cssanimista
+ * ---------------------------------------------- */
+
+/**
+ * ----------------------------------------
+ * animation vibrate-1
+ * ----------------------------------------
+ */
+@-webkit-keyframes vibrate-1 {
+  0% {
+    -webkit-transform: translate(0);
+    transform: translate(0);
+  }
+
+  20% {
+    -webkit-transform: translate(-2px, 2px);
+    transform: translate(-2px, 2px);
+  }
+
+  40% {
+    -webkit-transform: translate(-2px, -2px);
+    transform: translate(-2px, -2px);
+  }
+
+  60% {
+    -webkit-transform: translate(2px, 2px);
+    transform: translate(2px, 2px);
+  }
+
+  80% {
+    -webkit-transform: translate(2px, -2px);
+    transform: translate(2px, -2px);
+  }
+
+  100% {
+    -webkit-transform: translate(0);
+    transform: translate(0);
+  }
+}
+
+@keyframes vibrate-1 {
+  0% {
+    -webkit-transform: translate(0);
+    transform: translate(0);
+  }
+
+  20% {
+    -webkit-transform: translate(-2px, 2px);
+    transform: translate(-2px, 2px);
+  }
+
+  40% {
+    -webkit-transform: translate(-2px, -2px);
+    transform: translate(-2px, -2px);
+  }
+
+  60% {
+    -webkit-transform: translate(2px, 2px);
+    transform: translate(2px, 2px);
+  }
+
+  80% {
+    -webkit-transform: translate(2px, -2px);
+    transform: translate(2px, -2px);
+  }
+
+  100% {
+    -webkit-transform: translate(0);
+    transform: translate(0);
+  }
+}</style>
