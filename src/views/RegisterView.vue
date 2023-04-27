@@ -35,6 +35,7 @@
 <script>
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import Swal from "sweetalert2";
+import router from '@/router'
 
 export default {
   data() {
@@ -95,6 +96,7 @@ export default {
         title: 'Registro exitoso',
         text: 'El usuario ha sido registrado exitosamente.',
       });
+      router.push('/home');
     })
     .catch((error) => {
       const errorCode = error.code;
