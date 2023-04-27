@@ -27,7 +27,29 @@ export default createStore({
       signOut(auth).then(() => {
         // Sign-out successful.
         state.conectado = false;
-        router.push('/')
+        let timerInterval
+          Swal.fire({
+          title: 'Desconectando...',
+          html: 'Serás redireccionado en <b></b> segundos.',
+          timer: 3500,
+          timerProgressBar: true,
+          didOpen: () => {
+              Swal.showLoading()
+              const b = Swal.getHtmlContainer().querySelector('b')
+              timerInterval = setInterval(() => {
+              b.textContent = (Swal.getTimerLeft()/1000).toFixed(0)
+              }, 100)
+          },
+          willClose: () => {
+              clearInterval(timerInterval)
+          }
+          }).then((result) => {
+          if (result.dismiss === Swal.DismissReason.timer) {
+              console.log('Fui cerrado por el timer')
+              router.push('/')
+          }
+          })
+        
       }).catch((error) => {
         // An error happened.
         alert(error);

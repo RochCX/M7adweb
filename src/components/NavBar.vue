@@ -39,8 +39,8 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                  <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
-                    <a class="nav-link active" @click.prevent = "desloggear">Logout</a>
+                  <button @click.prevent = "desloggear" type="button" class="btn btn-primary" data-bs-dismiss="modal">
+                    <a class="nav-link active">Logout</a>
                   </button>
                 </div>
               </div>

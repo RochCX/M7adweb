@@ -12,9 +12,8 @@
                 <input v-model.trim="loginForm.email"  class="form-control mt-3" placeholder="Email" type="email" autocomplete="email">
                 <input v-model.trim="loginForm.password"  class="form-control mt-3" placeholder="Password" type="password" autocomplete="password">
                 <button class="btn btn-success mt-3 me-3" value="Ingresar" @click.prevent="login()">Ingresar</button>
-                <button class="btn btn-success mt-3 ms-3" value="chao" @click.prevent="loggout()">Chao</button>
                 <br><br>
-                <a href=""><router-link to="/register">No tienes cuenta? Has click</router-link></a>
+                <a href=""><router-link to="/register">No tienes cuenta? Haz click</router-link></a>
             </form>
           </div>
         </div>
@@ -79,7 +78,7 @@ export default {
             icon: 'error',
             title: 'Como tan weon',
             text: "Usuario o contraseña incorrectos",
-            footer: '<a href="/register">No tienes cuenta? has click aqui</a>'
+            footer: '<a href="/register">No tienes cuenta? Haz click aquí</a>'
           })}
         });
     },
@@ -93,7 +92,7 @@ export default {
 
     }
     else{
-      Swal.fire('Estas desconectado!')
+      Swal.fire('Estás desconectado!')
     }
   }
   },
