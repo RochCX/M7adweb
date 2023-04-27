@@ -83,10 +83,6 @@ export default {
           })}
         });
     },
-    async accessToken() {
-      const token = await auth.currentUser?.getIdToken();
-      console.log(token);
-    },
   loggout(){
     if (state.conectado == true){
       state.conectado = false;
