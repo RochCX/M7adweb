@@ -33,6 +33,7 @@ export default createStore({
           html: 'Serás redireccionado en <b></b> segundos.',
           timer: 3500,
           timerProgressBar: true,
+          allowOutsideClick: false,
           didOpen: () => {
               Swal.showLoading()
               const b = Swal.getHtmlContainer().querySelector('b')
