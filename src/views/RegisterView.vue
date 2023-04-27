@@ -106,7 +106,6 @@ export default {
         footer: errorCode
       })
     });
-  console.log(this.correoIngresado, this.passIngresado)
 }
   }
 }
