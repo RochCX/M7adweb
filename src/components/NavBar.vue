@@ -40,7 +40,7 @@
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                   <button @click.prevent = "desloggear" type="button" class="btn btn-primary" data-bs-dismiss="modal">
-                    <a class="nav-link active">Logout</a>
+                    <a class="nav-link active">Cerrar Sesión</a>
                   </button>
                 </div>
               </div>
@@ -84,6 +84,14 @@ nav {
 .navbar-nav {
  width: 100%;
  margin: 1em;
+}
+
+.btn-primary {
+  background-color: var(--gris-oscuro)!important;
+}
+
+.btn-primary:hover {
+  color: var(--verde)!important;
 }
 
 .vibrate-1 {

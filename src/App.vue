@@ -18,6 +18,26 @@ export default{
 </script>
 
 <style>
+:root {
+  --verde: #42b983;
+  --gris-oscuro: #353b41;
+  --gris: #2b3035;
+}
+
+.btn-primary {
+    margin: 1em;
+    background-color: var(--gris-oscuro)!important;
+    border: 1px solid var(--gris-oscuro)!important;
+}
+
+.btn-primary:hover {
+  background-color: var(--gris)!important;
+  border: 1px solid var(--gris)!important;
+  color: var(--verde)!important;
+}
+
+
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

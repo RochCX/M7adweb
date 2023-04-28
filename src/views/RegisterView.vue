@@ -125,7 +125,7 @@ export default {
       box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.2);
     }
     .card-header {
-      background-color: #28a745;
+      background-color: var(--gris-oscuro)!important;
       color: #fff;
       text-align: center;
       font-weight: bold;
@@ -146,7 +146,7 @@ export default {
       margin-bottom: 15px;
     }
     .btn {
-      background-color: #28a745;
+      background-color: var(--gris-oscuro)!important;
       border: none;
       padding: 10px 20px;
       font-weight: bold;
@@ -154,6 +154,10 @@ export default {
       margin-top: 30px;
     }
     .btn:hover {
-      background-color: #218838;
+      color: var(--verde)!important;
+    }
+
+    .input-group-text {
+      padding: .6em!important;
     }
   </style>

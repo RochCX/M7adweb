@@ -16,7 +16,7 @@ export default createStore({
   },
   getters: {
     arrayCursos(state) {
-      return state.cursos;
+      return eval(state.cursos).sort((a,b) => b.estado - a.estado);
     }
   },
   mutations: {
