@@ -1,42 +1,41 @@
 <template>
-    <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#curso-nuevo" @click="crearCurso">
-        Agregar Curso
-    </button>
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">Nombre</th>
-                <th scope="col">Descripcion</th>
-                <th scope="col">Código</th>
-                <th scope="col">Precio</th>
-                <th scope="col">Duracion</th>
-                <th scope="col">Cupos</th>
-                <th scope="col">Inscritos</th>
-                <th scope="col">Estado</th>
-                <th scope="col">Editar</th>
-                <th scope="col">Eliminar</th>
-            </tr>
-        </thead>
+    
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Descripcion</th>
+                    <th scope="col">Código</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col">Duracion</th>
+                    <th scope="col">Cupos</th>
+                    <th scope="col">Inscritos</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Editar</th>
+                    <th scope="col">Eliminar</th>
+                </tr>
+            </thead>
 
-        <tbody v-for="curso in cursos" :key="curso.codigo">
-            <tr>
-                <td>{{ curso.nombre }}</td>
-                <td>{{ curso.descripcion }}</td>
-                <td>{{ curso.codigo }}</td>
-                <td>${{ parseInt(curso.precio).toLocaleString('es-cl') }}</td>
-                <td>{{ curso.duracion }}</td>
-                <td>{{ curso.cupos }}</td>
-                <td>{{ curso.inscritos }}</td>
-                <td :class="curso.estado ? 'verde' : 'rojo'">{{ curso.estado ? "Disponible" : "No Disponible" }}</td>
-                <td @click="editarCurso(curso)" data-bs-toggle="modal" data-bs-target="#curso-nuevo"><font-awesome-icon
-                        class="boton" :icon="['fas', 'pen-to-square']" /></td>
-                <td @click="modalBorrar(curso.id)"><font-awesome-icon class="boton" :icon="['fas', 'fa-trash']" /></td>
-            </tr>
-        </tbody>
-    </table>
-    <div v-if="arrayCursos.length == 0" id="carga">
-        <PulseLoader></PulseLoader>
+            <tbody v-for="curso in cursos" :key="curso.codigo">
+                <tr>
+                    <td>{{ curso.nombre }}</td>
+                    <td>{{ curso.descripcion }}</td>
+                    <td>{{ curso.codigo }}</td>
+                    <td>${{ parseInt(curso.precio).toLocaleString('es-cl') }}</td>
+                    <td>{{ curso.duracion }}</td>
+                    <td>{{ curso.cupos }}</td>
+                    <td>{{ curso.inscritos }}</td>
+                    <td :class="curso.estado ? 'verde' : 'gris'">{{ curso.estado ? "Disponible" : "No Disponible" }}</td>
+                    <td @click="editarCurso(curso)" data-bs-toggle="modal" data-bs-target="#curso-nuevo"><font-awesome-icon
+                            class="boton" :icon="['fas', 'pen-to-square']" /></td>
+                    <td @click="modalBorrar(curso.id)"><font-awesome-icon class="boton" :icon="['fas', 'fa-trash']" /></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
+
+    
 
     <!-- Modal -->
     <div class="modal fade" id="curso-nuevo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -63,12 +62,12 @@
                         v-model="datosModal.inputCupos">
                     <input type="text" class="form-control my-3" placeholder="Inscritos del Curso"
                         v-model="datosModal.inputInscritos">
-                    <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault"
-                            v-model="datosModal.inputEstado">
-                        <label class="form-check-label" for="flexSwitchCheckDefault">{{ datosModal.inputEstado ?
-                            "Disponible"
-                            : "No Disponible" }}</label>
+                    <div class="form-check form-switch text-left ">
+
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" v-model="datosModal.inputEstado">
+                        
+                        <label class="form-check-label" for="flexSwitchCheckDefault">{{ datosModal.inputEstado ? "Disponible" : "No Disponible" }}</label>
+                            
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -83,6 +82,14 @@
             </div>
         </div>
     </div>
+
+    <div v-if="arrayCursos.length == 0" id="carga">
+        <PulseLoader></PulseLoader>
+    </div>
+
+    <button v-if="arrayCursos.length != 0" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#curso-nuevo" @click="crearCurso">
+        Agregar Curso&nbsp;&nbsp;<font-awesome-icon :icon="['fas', 'file-circle-plus']" />
+    </button>
 </template>
 
 <script>
@@ -192,15 +199,20 @@ export default {
 </script>
 
 <style scoped>
+
+.text-left {
+    text-align: left!important;
+}
 .boton {
     cursor: pointer
 }
 
 .verde {
-    color: green
+    color: var(--verde);
 }
 
-.rojo {
-    color: red;
+.gris {
+    color: #a3a3a3
 }
+
 </style>
